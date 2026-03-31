@@ -53,6 +53,3 @@ Visualize (scatter plot: true vs predicted)
 - Housing prices above 5.0 (likely capped values) are filtered out to reduce noise.
 - train_size=0.2 means only 20% of the data is used for training — intentionally small for experimentation.
 - random_state=42 ensures reproducibility.
----
-## 👤 Author
-Built as part of a weekly machine learning study plan.
