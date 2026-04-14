@@ -1,55 +1,103 @@
-# 🏠 California Housing Price Prediction
-A beginner-friendly machine learning project using **scikit-learn** to predict California housing prices with Linear Regression.
+# California Housing Price Prediction
+
+A small machine learning project based on **scikit-learn** that explores California housing price prediction with **Linear Regression**.
+
+This repository contains:
+
+- a **baseline model** for quick prediction and visualization
+- an **experiment version** that compares different preprocessing settings and model complexities
+
 ---
-## 📌 Project Overview
-This project trains a Linear Regression model on the [California Housing Dataset](https://scikit-learn.org/stable/datasets/real_world.html#california-housing-dataset) to predict house prices, and visualizes the prediction results with a scatter plot.
+
+## Project Goals
+
+This project is designed to practice a complete beginner-friendly ML workflow:
+
+- load and clean real-world data
+- train a regression model
+- evaluate performance with multiple metrics
+- compare different experimental settings
+- visualize prediction results clearly
+
 ---
-## 📉 Visualization
-The scatter plot compares **true house prices** (x-axis) vs **predicted house prices** (y-axis).  
-The red diagonal line represents perfect predictions — the closer the dots are to this line, the better the model.
-<img src="true_vs_pred.png" width="500"/>
-> The model captures the overall trend well, though scatter increases at higher price ranges — typical behavior for Linear Regression on this dataset.
+
+## Dataset
+
+The project uses the **California Housing Dataset** from scikit-learn.
+
+Target: median house value
+
+A simple filtering step is applied in the experiments:
+
+- `y < 5.0`
+
+This removes some high-value outliers and keeps the task more stable for learning and comparison.
+
 ---
-## 🗂️ Project Structure
-├── main.py                     # Main script: data loading, training, evaluation, visualization
-├── prediction_plot.png         # Visualization output
-└── README.md
+
+## Files
+
+### 1. Baseline script
+This version trains a plain **LinearRegression** model and shows a single scatter plot of:
+
+- true house prices
+- predicted house prices
+
+It is useful for understanding the basic pipeline:
+data loading → splitting → training → prediction → evaluation → visualization
+
+### 2. Experiment script
+This version adds:
+
+- **PolynomialFeatures** for model complexity control
+- **StandardScaler** for normalization
+- **cross_val_score** for 5-fold cross validation
+- a **2×2 subplot figure** for comparison
+
+It runs four experiments:
+
+- no scaling + degree 1
+- scaling + degree 1
+- no scaling + degree 2
+- scaling + degree 2
+
 ---
-## 🔧 Dependencies
-pip install scikit-learn numpy matplotlib
+
+## Experiment Design
+
+The second script compares two ideas:
+
+### Feature scaling
+Checks whether standardization changes model performance.
+
+### Polynomial expansion
+Checks whether increasing feature complexity helps or hurts the model.
+
+The results show:
+
+- degree 1 behaves normally and is stable
+- degree 2 performs much worse, which suggests overfitting
+- scaling has almost no effect on linear regression in this setup
+
 ---
-## 🚀 How to Run
-python main.py
+
+## Visualization
+
+The plots show **true house prices** on the x-axis and **predicted house prices** on the y-axis.
+
+The diagonal red line represents perfect prediction:
+
+- points closer to the line indicate better predictions
+- points far away from the line indicate larger errors
+
+In the experiment script, the results are displayed as a **2×2 grid** for easy comparison.
+
 ---
-## 📊 Pipeline
-Load Data (fetch_california_housing)
-    ↓
-Filter outliers (y < 5.0)
-    ↓
-Split Data (train_test_split, train=20%)
-    ↓
-Train Model (LinearRegression.fit)
-    ↓
-Predict (model.predict)
-    ↓
-Evaluate (MSE, R²)
-    ↓
-Visualize (scatter plot: true vs predicted)
----
-## 📈 Evaluation Metrics
-| Metric | Description |
-|---|---|
-| **MSE** (Mean Squared Error) | Average squared error between predicted and true values. Lower is better. |
-| **R²** (R-squared) | How well the model explains data variance. Closer to 1 is better. |
----
-## 🧠 Key Concepts
-- train_test_split — Splits dataset into training and testing sets
-- LinearRegression — Fits a linear model: y = Xw + b
-- .fit() — Trains the model on training data
-- .predict() — Generates predictions on test data
-- joblib — Can be used to save and reload the trained model
----
-## 📝 Notes
-- Housing prices above 5.0 (likely capped values) are filtered out to reduce noise.
-- train_size=0.2 means only 20% of the data is used for training — intentionally small for experimentation.
-- random_state=42 ensures reproducibility.
+
+## Project Structure
+
+```text
+├── main.py                  # Baseline linear regression script
+├── experiment.py            # Comparison experiment script
+├── README.md                # Project description
+└── true_vs_pred.png         # Optional saved plot image
